@@ -5,7 +5,7 @@
   Tiles all annotations with detection objects, and then exports the centroids of those tiles to a CSV
   All detections are then exported as .tif files
   Set frameWidth, frameHeight and overlap
-
+  Set the baseDirectory, unless you have an F:/Data folder!
 */
 createTiles = true
 
