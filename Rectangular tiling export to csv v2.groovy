@@ -1,3 +1,6 @@
+//Exports only a CSV file with two columns for the X and Y coordinates of the UPPER LEFT CORNER of the tile, in pixels
+//Pixel values are based on the upper left corner of the whole image.
+
 createTiles = true
 
 double frameWidth = 1320/4
@@ -22,7 +25,7 @@ String header="x_pos,y_pos";
 
 annotations.each{a->
     roiA = a.getROI()
-    //generate a bounding box to create tiles within
+    //generate a bounding box of the whole annotation to create tiles within
     bBoxX = a.getROI().getBoundsX()
     bBoxY = a.getROI().getBoundsY()
     bBoxH = a.getROI().getBoundsHeight()
@@ -56,6 +59,7 @@ if(createTiles==true){
     addObjects(newTiles)
     resolveHierarchy()
 }
+///////////////////////
 print " "
 print "Output saved in  folder at " + tilePath
 
