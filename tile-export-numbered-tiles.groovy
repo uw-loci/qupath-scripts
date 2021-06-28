@@ -56,9 +56,10 @@ new File(path).withWriter { fw ->
                     pathToImage = buildFilePath(baseDirectory, "Image tiles", index+".tiff")
                     requestROI = RegionRequest.createInstance(server.getPath(), 1, roi)
                     writeImageRegion(server, requestROI, pathToImage)
+                    index++
                 }
                 x = x+frameWidth-overlapPercent/100*frameWidth
-                index++
+                
                 
             }
             y = y+frameHeight-overlapPercent/100*frameHeight
