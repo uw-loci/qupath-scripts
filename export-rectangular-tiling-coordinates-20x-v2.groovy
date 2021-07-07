@@ -4,7 +4,8 @@ double pixelSizeSource = 1.105
 double pixelSizeTarget = 0.222
 double frameWidth = 1392 / pixelSizeSource * pixelSizeTarget
 double frameHeight = 1040 / pixelSizeSource * pixelSizeTarget
-double overlap = 50 * pixelSizeSource * pixelSizeTarget
+//Overlap percent - 10% is 10, not 0.1
+double overlapPercent = 10
 baseDirectory = PROJECT_BASE_DIR
 
 /***********************************************/
@@ -54,14 +55,14 @@ annotations.eachWithIndex{a,i->
                 print index + " good "+x
             }else {print x}
             if (yline%2 ==0){
-                x = x+frameWidth-overlap
-            } else { x = x-(frameWidth - overlap)}
+                x = x+frameWidth-overlapPercent/100*frameWidth
+            } else { x = x-(frameWidth - overlapPercent/100*frameWidth)}
             index++
         }
-        y = y+frameHeight-overlap
+        y = y+frameHeight-overlapPercent/100*frameHeight
         if (yline%2 ==0){
-            x = x-(frameWidth - overlap)
-         } else {x = x+frameWidth-overlap}
+            x = x-(frameWidth - overlapPercent/100*frameWidth)
+         } else {x = x+frameWidth-overlapPercent/100*frameWidth}
         
         yline++
     }
@@ -82,13 +83,6 @@ annotations.eachWithIndex{a,i->
     }
 }
 
-boolean createATile(x,y,width,height, overlap, roiA) {
-    def roi = new RectangleROI(x,y,width,height, ImagePlane.getDefaultPlane())
-    if(roiA.getGeometry().intersects(roi.getGeometry())){
-        newTiles << PathObjects.createDetectionObject(roi)
-        return true;
-    }else{ return false;}
-}
 
 import qupath.imagej.gui.IJExtension
 import qupath.imagej.tools.IJTools
