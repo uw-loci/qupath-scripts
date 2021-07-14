@@ -1,0 +1,84 @@
+{
+  "pixel_classifier_type": "OpenCVPixelClassifier",
+  "metadata": {
+    "inputPadding": 0,
+    "inputResolution": {
+      "pixelWidth": {
+        "value": 8.84,
+        "unit": "µm"
+      },
+      "pixelHeight": {
+        "value": 8.84,
+        "unit": "µm"
+      },
+      "zSpacing": {
+        "value": 1.0,
+        "unit": "z-slice"
+      },
+      "timeUnit": "SECONDS",
+      "timepoints": []
+    },
+    "inputWidth": 512,
+    "inputHeight": 512,
+    "inputNumChannels": 3,
+    "outputType": "CLASSIFICATION",
+    "outputChannels": [],
+    "classificationLabels": {
+      "1": {
+        "name": "Positive",
+        "colorRGB": -377282
+      }
+    }
+  },
+  "op": {
+    "type": "data.op.channels",
+    "colorTransforms": [
+      {
+        "stains": {
+          "name": "CAMM 4x",
+          "stain1": {
+            "r": 0.6556516687860459,
+            "g": 0.7110749439813712,
+            "b": 0.25395533713620394,
+            "name": "Hematoxylin",
+            "isResidual": false
+          },
+          "stain2": {
+            "r": 0.210150951064448,
+            "g": 0.8406532854307379,
+            "b": 0.49913788822450067,
+            "name": "Eosin",
+            "isResidual": false
+          },
+          "stain3": {
+            "r": 0.27930964564762883,
+            "g": -0.5408845281526167,
+            "b": 0.7933662767305638,
+            "name": "Residual",
+            "isResidual": true
+          },
+          "maxRed": 245.0,
+          "maxGreen": 245.0,
+          "maxBlue": 246.0
+        },
+        "stainNumber": 2
+      }
+    ],
+    "op": {
+      "type": "op.core.sequential",
+      "ops": [
+        {
+          "type": "op.filters.gaussian",
+          "sigmaX": 2.0,
+          "sigmaY": 2.0
+        },
+        {
+          "type": "op.threshold.constant",
+          "thresholds": [
+            0.05
+          ]
+        }
+      ]
+    }
+  }
+}
